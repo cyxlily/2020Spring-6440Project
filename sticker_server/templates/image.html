@@ -1,0 +1,116 @@
+<style>
+    /* Image Designing Propoerties */
+    .thumb {
+        height: 75px;
+        border: 1px solid #000;
+        margin: 10px 5px 0 0;
+    }
+
+    .btn {
+        width: 270px;
+        height: 40px;
+        border-width: 0px;
+        border-radius: 3px;
+        background: #1E90FF;
+        cursor: pointer;
+        outline: none;
+        font-family: Microsoft YaHei;
+        color: white;
+        font-size: 17px;
+    }
+    .btn:hover {
+        background: #5599FF;
+    }
+
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #D0EEFF;
+        border: 1px solid #99D3F5;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
+
+    .vintage{
+        background: #EEE url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAHklEQVQImWNkYGBgYGD4//8/A5wF5SBYyAr+//8PAPOCFO0Q2zq7AAAAAElFTkSuQmCC) repeat;
+        text-shadow: 5px -5px black, 4px -4px white;
+        font-size: 80px;
+        font-weight: bold;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text
+    }
+
+</style>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Sticker Maker</title>
+    </head>
+
+    <body id= "backGround" background="/static/files/Background/Background.png">
+        <h1 class="vintage" align="center">Sticker Maker</h1>
+        <div style="text-align:center;vertical-align:middle;">
+          <form id="uploadForm" enctype="multipart/form-data" >
+            <input class="file" type="file" name="file">
+            </br></br><img id="myImg" src="/static/files/img1/example.jpg" width="300" alt="your image">
+            </br></br>
+            <input type="button" class="btn" value="Generate sticker!" id="upFileBtn">
+          </form>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            //upload the image when click the uplaod button
+            $('#upFileBtn').click(function () {
+                var formFile = new FormData($('#uploadForm')[0]);
+                // url:"http://ApiDemo-env.eba-qyf98pxi.us-east-1.elasticbeanstalk.com/api",
+                $.ajax({
+                      url:"/up_file",
+                      type:"POST",
+                      data:formFile,
+                      processData:false,
+                      contentType:false,
+                      success: function (data) {
+                        $("#myImg").attr("src",data['sticker']);
+                        $("#backGround").attr("background",data['background'])
+                        console.log(data['emotion'])
+                      }
+                   })
+            });
+
+            //listen to the file change and upload the preview
+            window.addEventListener('load', function() {
+                document.querySelector('input[type="file"]').addEventListener('change', function() {
+                      if (this.files && this.files[0]) {
+                          var img = document.querySelector('img');  // $('img')[0]
+                          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+                          img.onload = imageIsLoaded;
+                      }
+                });
+            });
+
+            function imageIsLoaded() {
+                console.log("load success!")
+            }
+        </script>
+    </body>
+</html>
