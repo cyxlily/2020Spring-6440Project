@@ -37,6 +37,8 @@ $ docker run -it -p 5000:5000 -p 5001:5001 -v $PWD:/home/lily cyxlily/sticker_ap
 ```
 Test: On your Ubuntu browser, enter http://localhost:5000/, and you will see the API document.
 
+![image](https://github.com/cyxlily/2020Spring-6440Project/blob/main/api.png) 
+
 3. Setup server
 Open a new terminal on Ubuntu.
 
@@ -54,6 +56,7 @@ $ python no_database_app.py
 ```
 Test: On your Ubuntu browser, enter http://localhost:5001/, and you will see the Sticker Maker web page. Upload your photo and get your sticker.
 
+![image](https://github.com/cyxlily/2020Spring-6440Project/blob/main/server.png)
 
 Also, you can deploy it onto Cloud.
 
