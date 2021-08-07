@@ -83,4 +83,4 @@ def send_req_to_API(file_name):
         traceback.print_exc(file=sys.stdout)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)

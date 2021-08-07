@@ -33,7 +33,7 @@ $ cd 2020Spring-6440Project
  
 ```sh
 $ docker pull cyxlily/sticker_api 
-$ docker run -it -p 5000:5000 -p 5001:5001 -v $PWD:/home/lily cyxlily/sticker_api
+$ docker run -it -p 5000:5000 -p 80:80 -v $PWD:/home/lily cyxlily/sticker_api
 ```
 Test: On your Ubuntu browser, enter http://localhost:5000/, and you will see the API document.
 
@@ -54,7 +54,7 @@ In docker, run server.
 $ cd /home/lily/sticker_server 
 $ python no_database_app.py
 ```
-Test: On your Ubuntu browser, enter http://localhost:5001/, and you will see the Sticker Maker web page. Upload your photo and get your sticker.
+Test: On your Ubuntu browser, enter http://localhost:80/, and you will see the Sticker Maker web page. Upload your photo and get your sticker.
 
 ![image](https://github.com/cyxlily/2020Spring-6440Project/blob/main/server.png)
 
